@@ -32,6 +32,7 @@ class intestatario (models.Model):
 	indirizzo = models.CharField(max_length=40)
 	cognome = models.CharField(max_length=30)
 	nome = models.CharField(max_length=30)
+	prov = models.CharField(max_length=4)
 
 	def __unicode__(self):
 		return u'%s (CF:%s, PI:) %s %s %s %s' % (self.idI, self.CF, self.PI, self.data_nascita, self.indirizzo, self.cognome, self.nome)
@@ -42,8 +43,9 @@ class intestatario (models.Model):
 class veicolo (models.Model):
 	targa = models.CharField(primary_key=True, max_length=10)
 	ntelaio = models.IntegerField()
+	nome = models.CharField(max_length=15)
 	data_im = models.DateField()
-	data_omo = models.DateField()
+	data_omo = models.DateField(null=True)
 	id_tipo = models.ForeignKey('tipologia')
 	idI = models.ForeignKey('intestatario')
 
