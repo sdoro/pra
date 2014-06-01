@@ -26,7 +26,26 @@ def q3(request):
         elenco += "%s<br>" % (p.cod_pat)
     return HttpResponse(elenco)
 
+from django.db import connection
 def q4(request):
-    elenco = ""
+    elenco = "Numero max: "
+    query = '''
+SELECT max(totale)
+FROM
+  (SELECT i.prov,
+          count(i.prov) AS totale
+   FROM pra_intestatario AS i
+   INNER JOIN pra_patente AS p ON p.idI_id = i.idI
+   WHERE i.prov IN ('VE',
+                    'TV',
+                    'PD')
+     AND i.data_nascita < '1954-05-23'
+   GROUP BY i.prov) AS over60'''
+
+    cursor = connection.cursor()
+    cursor.execute(query)
+    elenco += "%s<br>" % cursor.fetchall()[0]
+    #elenco += "%s<br>" % cursor.fetchall()
+
     return HttpResponse(elenco)
 
