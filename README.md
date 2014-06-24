@@ -33,7 +33,7 @@ Dopo aver verificato la correttezza si costruisce una
 directory 'sql' e si inserisce tanti file corrispondenti
 alle tabelle (class) con estensione '.sql' e contenenti
 i comandi di insert. Alla fine si genera il db e si
-genera anche la parte 'admin':
+genera anche la parte 'admin' (user/password=dba/dba):
 
 	$ nano pra/admin.py
 	$ ./manage.py syncdb
